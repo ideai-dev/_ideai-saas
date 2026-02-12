@@ -1,7 +1,7 @@
-# v0-Optimized Architecture Guide
-## How to Structure Your Monorepo for Seamless Vercel + v0 Integration
+# Collective 3.0 Architecture Guide
+## v0-Optimized Structure for Seamless Vercel + v0 Integration
 
-**Purpose:** This guide shows your team how to structure your existing Python/Rust/Node.js services to work perfectly with Vercel deployment and v0 AI assistant, while keeping all your current service architecture intact.
+**Purpose:** This guide shows your team how to structure Collective 3.0's Python/Rust/Node.js services to work perfectly with Vercel deployment and v0 AI assistant, while keeping all your current service architecture intact.
 
 ---
 

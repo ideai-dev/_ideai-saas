@@ -1,6 +1,7 @@
-# Migration Plan: Current → v0-Optimized Structure
+# Collective 3.0 Migration Plan
+## Current Architecture → v0-Optimized Structure
 
-**Goal:** Transform your current architecture into a v0/Vercel-optimized monorepo while keeping all your existing services, intelligence tags, and Python/Rust/Node.js flexibility.
+**Goal:** Transform Collective 3.0's current architecture into a v0/Vercel-optimized monorepo while keeping all your existing services, intelligence tags, and Python/Rust/Node.js flexibility.
 
 **Timeline:** 4-6 weeks (depending on team size and complexity)
 
