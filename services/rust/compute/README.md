@@ -2,6 +2,9 @@
 
 High-performance vector operations and compute-intensive tasks.
 
+**Registry:** `services/services.json` → `id: compute`  
+**Tags:** compute, rust, vector, batch, tokenization, performance, pipeline, embedding-batch
+
 ## Language: Rust (future implementation)
 ## Location: services/rust/compute/
 

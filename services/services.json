@@ -1,0 +1,233 @@
+{
+  "$schema": "./services.schema.json",
+  "version": "1.0.0",
+  "description": "Registry of all services (active and planned). Single source of truth for indexing, discovery, and orchestration.",
+  "services": [
+    {
+      "id": "llm-service",
+      "name": "LLM Service",
+      "slug": "llm",
+      "description": "Multi-provider LLM routing: OpenAI, Anthropic, local Ollama. Model selection, fallback, cost optimization.",
+      "descriptionLong": "Routes requests to the best LLM provider. Contains business logic for model selection, fallback chains, and cost optimization. Imports from providers (OpenAI, Anthropic); no direct DB access.",
+      "tags": ["llm", "ai", "chat", "completion", "openai", "anthropic", "ollama", "routing", "inference"],
+      "category": "ai",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI",
+      "status": "active",
+      "path": "services/python/llm-service",
+      "defaultPort": 8001,
+      "providers": ["openai", "anthropic"],
+      "capabilities": [
+        "Chat completions (streaming and non-streaming)",
+        "Model selection and fallback",
+        "Cost-aware routing",
+        "Local Ollama support for sovereign deployment"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use for any text generation, chat, or completion. Gateway for all LLM calls."
+    },
+    {
+      "id": "mcp-service",
+      "name": "MCP Service",
+      "slug": "mcp",
+      "description": "Model Context Protocol server. Exposes tools (search, code, file access) to Claude Desktop, Cursor, v0.",
+      "descriptionLong": "Custom MCP server exposing your tools via the Model Context Protocol. Contains tool implementations and business logic. Connects to Claude Desktop, Cursor, v0, and other MCP clients.",
+      "tags": ["mcp", "protocol", "tools", "claude", "cursor", "v0", "context", "agent"],
+      "category": "protocol",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI + MCP SDK",
+      "status": "active",
+      "path": "services/python/mcp-service",
+      "defaultPort": 8002,
+      "providers": [],
+      "capabilities": [
+        "Expose custom tools via MCP",
+        "Search, code, file access tools",
+        "Connect to Claude Desktop / Cursor / v0",
+        "Extensible tool implementations"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use when you need AI clients to call your tools. Single MCP entry point for the platform."
+    },
+    {
+      "id": "vector-db",
+      "name": "Vector DB Service",
+      "slug": "vector-db",
+      "description": "Vector DB abstraction: Pinecone (external) and ChromaDB (internal). Embeddings, index management, similarity search.",
+      "descriptionLong": "Abstracts vector stores (Pinecone, ChromaDB). Contains embedding logic, index lifecycle, and similarity search. Imports from providers/pinecone; hosts or connects to Chroma for sovereign option.",
+      "tags": ["vector", "embedding", "search", "similarity", "pinecone", "chroma", "rag", "retrieval", "semantic"],
+      "category": "storage",
+      "language": "typescript",
+      "runtime": "nodejs",
+      "framework": "Express",
+      "status": "active",
+      "path": "services/nodejs/vector-db",
+      "defaultPort": 3004,
+      "providers": ["pinecone"],
+      "capabilities": [
+        "Embedding generation and storage",
+        "Index create/update/delete",
+        "Similarity and hybrid search",
+        "ChromaDB for sovereign / local vector store"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use for RAG, semantic search, document retrieval. All vector ops go through this service."
+    },
+    {
+      "id": "compute",
+      "name": "Compute Service",
+      "slug": "compute",
+      "description": "High-performance vector ops and compute-intensive tasks in Rust. Batch embeddings, tokenization, data pipelines.",
+      "descriptionLong": "Rust service for CPU-heavy work: vector math, tokenization, batch processing. 10–100x faster than Python for same tasks. Zero-cost abstractions, no GC. Planned for batch embeddings and data pipelines.",
+      "tags": ["compute", "rust", "vector", "batch", "tokenization", "performance", "pipeline", "embedding-batch"],
+      "category": "compute",
+      "language": "rust",
+      "runtime": "rust",
+      "framework": null,
+      "status": "planned",
+      "path": "services/rust/compute",
+      "defaultPort": 8005,
+      "providers": [],
+      "capabilities": [
+        "Batch vector operations",
+        "Tokenization at scale",
+        "Data pipeline stages",
+        "CPU-bound preprocessing"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use when Python/Node is too slow for bulk vector or text processing. Not yet implemented."
+    },
+    {
+      "id": "webscraping",
+      "name": "Web Scraping Service",
+      "slug": "webscraping",
+      "description": "Fetch and extract structured content from web pages. Respects robots.txt, rate limits, and returns clean HTML or parsed data.",
+      "descriptionLong": "Dedicated service for fetching URLs and extracting content (HTML, metadata, main text). Handles robots.txt, rate limiting, and optional headless rendering. Outputs structured data for indexing or LLM context.",
+      "tags": ["webscraping", "scraping", "crawl", "fetch", "extract", "url", "html", "data-ingestion"],
+      "category": "data-ingestion",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI",
+      "status": "planned",
+      "path": "services/python/webscraping",
+      "defaultPort": 8006,
+      "providers": [],
+      "capabilities": [
+        "HTTP fetch with retries and timeouts",
+        "HTML parsing and main-content extraction",
+        "Optional headless browser (Playwright)",
+        "robots.txt and rate-limit awareness"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use for ingesting web pages into docs or RAG. Complements crawling for full-site vs single-URL."
+    },
+    {
+      "id": "transcribing",
+      "name": "Transcribing Service",
+      "slug": "transcribing",
+      "description": "Audio and video to text. Speech-to-text (Whisper, cloud STT), with optional speaker diarization and timestamps.",
+      "descriptionLong": "Converts audio/video to text. Supports local (Whisper) and cloud STT. Optional speaker diarization and word-level timestamps. Outputs transcripts for search, LLM context, or captions.",
+      "tags": ["transcribing", "transcription", "speech-to-text", "stt", "audio", "video", "whisper", "diarization"],
+      "category": "media",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI",
+      "status": "planned",
+      "path": "services/python/transcribing",
+      "defaultPort": 8007,
+      "providers": [],
+      "capabilities": [
+        "Audio/video file ingestion",
+        "Speech-to-text (Whisper or cloud)",
+        "Speaker diarization",
+        "Timestamped segments for captions/search"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use for meetings, podcasts, videos. Feeds into RAG or search after transcription."
+    },
+    {
+      "id": "crawling",
+      "name": "Crawling Service",
+      "slug": "crawling",
+      "description": "Site-wide discovery and URL scheduling. Sitemaps, link extraction, depth limits, and polite crawling for webscraping pipeline.",
+      "descriptionLong": "Orchestrates discovery of URLs for a domain or seed set. Handles sitemaps, link extraction, depth/breadth limits, and scheduling. Feeds URLs to webscraping service; does not fetch body content itself.",
+      "tags": ["crawling", "crawl", "sitemap", "discovery", "urls", "data-ingestion", "pipeline"],
+      "category": "data-ingestion",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI",
+      "status": "planned",
+      "path": "services/python/crawling",
+      "defaultPort": 8008,
+      "providers": [],
+      "capabilities": [
+        "Sitemap parsing",
+        "Link extraction and deduplication",
+        "Depth/breadth and rate limits",
+        "URL queue for webscraping"
+      ],
+      "dependsOn": ["webscraping"],
+      "healthPath": "/health",
+      "indexHint": "Use for full-site ingestion. Works with webscraping: crawl discovers URLs, webscraping fetches content."
+    },
+    {
+      "id": "document-extraction",
+      "name": "Document Extraction Service",
+      "slug": "document-extraction",
+      "description": "Extract text and structure from PDFs, Office docs, and images. OCR optional. Output for RAG or search.",
+      "descriptionLong": "Parses PDF, DOCX, PPTX, and images (with optional OCR) into plain text and optional structure (headings, tables). Output feeds vector-db or LLM context for RAG and search.",
+      "tags": ["document", "extraction", "pdf", "docx", "ocr", "parsing", "data-ingestion", "rag"],
+      "category": "data-ingestion",
+      "language": "python",
+      "runtime": "python",
+      "framework": "FastAPI",
+      "status": "planned",
+      "path": "services/python/document-extraction",
+      "defaultPort": 8009,
+      "providers": [],
+      "capabilities": [
+        "PDF text and structure extraction",
+        "Office (DOCX, PPTX) parsing",
+        "Image OCR (Tesseract or cloud)",
+        "Structured output for chunking"
+      ],
+      "dependsOn": [],
+      "healthPath": "/health",
+      "indexHint": "Use for document RAG. Ingest PDFs/docs before embedding and indexing in vector-db."
+    }
+  ],
+  "apps": [
+    {
+      "id": "api",
+      "name": "FastAPI Gateway",
+      "path": "apps/api",
+      "type": "gateway",
+      "description": "Central REST API: auth, users, documents, LLM proxy, vectors. Consumes llm-service and vector-db. No direct DB in services; this app owns API surface.",
+      "tags": ["api", "gateway", "rest", "auth", "llm", "vectors", "documents", "fastapi"],
+      "defaultPort": 8000,
+      "consumes": ["llm-service", "vector-db"],
+      "exposes": ["/api/v1/health", "/api/v1/auth", "/api/v1/users", "/api/v1/llm", "/api/v1/vectors", "/api/v1/documents"],
+      "healthPath": "/health"
+    }
+  ],
+  "categories": {
+    "ai": "LLM, inference, chat, completions",
+    "protocol": "MCP, APIs, agent interfaces",
+    "storage": "Vector DBs, caches, indexes",
+    "compute": "CPU-heavy batch, Rust/native",
+    "data-ingestion": "Web, crawl, scrape, document parse",
+    "media": "Audio, video, transcription"
+  },
+  "tagIndex": [
+    "llm", "ai", "vector", "embedding", "search", "rag", "mcp", "transcribing", "webscraping", "crawling",
+    "document", "pdf", "ocr", "compute", "batch", "protocol", "data-ingestion", "media"
+  ]
+}

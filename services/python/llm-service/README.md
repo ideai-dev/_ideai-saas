@@ -2,6 +2,9 @@
 
 Multi-provider LLM routing service.
 
+**Registry:** `services/services.json` → `id: llm-service`  
+**Tags:** llm, ai, chat, completion, openai, anthropic, ollama, routing, inference
+
 ## Language: Python 3.12+
 ## Framework: FastAPI
 ## Location: services/python/llm-service/

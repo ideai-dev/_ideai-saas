@@ -2,6 +2,9 @@
 
 Custom Model Context Protocol server.
 
+**Registry:** `services/services.json` → `id: mcp-service`  
+**Tags:** mcp, protocol, tools, claude, cursor, v0, context, agent
+
 ## Language: Python 3.12+
 ## Framework: FastAPI + MCP SDK
 ## Location: services/python/mcp-service/
