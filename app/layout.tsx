@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: '2027 Full-Stack Monorepo - Multi-Language SaaS Collective 3.0',
+  title: 'SaaS Collective 3.0 - Multi-Language 2027 Full-Stack Monorepo',
   description: 'Best-in-class Turborepo monorepo with Next.js 16, FastAPI, Node.js microservices, and AWS integration. Multi-language SaaS platform built for 2027.',
   keywords: ['monorepo', 'turborepo', 'nextjs', 'fastapi', 'nodejs', 'typescript', 'python', 'collective', 'saas', 'aws'],
   generator: 'v0.app',
