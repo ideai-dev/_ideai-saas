@@ -41,7 +41,7 @@ export default function Page() {
             <div className="flex items-center gap-3">
               <Boxes className="h-7 w-7 text-primary" />
               <h1 className="text-xl font-bold">2027 Full-Stack Monorepo</h1>
-              <Badge variant="secondary" className="text-[10px]">Multi-Language SaaS</Badge>
+              <Badge variant="secondary" className="text-[10px]">Multi-Language SaaS Collective 3.0</Badge>
             </div>
             <div className="flex items-center gap-3">
               <ThemeSwitcher />
