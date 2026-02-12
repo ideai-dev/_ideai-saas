@@ -1,4 +1,4 @@
-# SaaS Collective 3.0
+# Collective 3.0
 ## Multi-Language 2027 Full-Stack Monorepo
 
 **Purpose:** This guide shows your team how to structure Collective 3.0's Python/Rust/Node.js services to work perfectly with Vercel deployment and v0 AI assistant, while keeping all your current service architecture intact.

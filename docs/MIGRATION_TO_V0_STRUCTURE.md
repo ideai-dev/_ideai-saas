@@ -1,4 +1,4 @@
-# SaaS Collective 3.0 Migration Plan
+# Collective 3.0 Migration Plan
 ## Multi-Language 2027 Full-Stack Monorepo
 
 **Goal:** Transform Collective 3.0's current architecture into a v0/Vercel-optimized monorepo while keeping all your existing services, intelligence tags, and Python/Rust/Node.js flexibility.
