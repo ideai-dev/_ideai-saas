@@ -1,0 +1,112 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "name": "Vercel Platform",
+      "description": "Deploy and manage applications on Vercel",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-vercel"],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}",
+        "VERCEL_TEAM_ID": "${VERCEL_TEAM_ID}"
+      },
+      "capabilities": {
+        "tools": [
+          {
+            "name": "deploy",
+            "description": "Deploy the project to Vercel",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "environment": {
+                  "type": "string",
+                  "enum": ["production", "preview", "development"],
+                  "description": "Deployment environment"
+                },
+                "projectName": {
+                  "type": "string",
+                  "description": "Vercel project name"
+                }
+              },
+              "required": ["projectName"]
+            }
+          },
+          {
+            "name": "get_deployments",
+            "description": "List recent deployments",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "projectName": {
+                  "type": "string",
+                  "description": "Vercel project name"
+                },
+                "limit": {
+                  "type": "number",
+                  "description": "Number of deployments to retrieve",
+                  "default": 10
+                }
+              },
+              "required": ["projectName"]
+            }
+          },
+          {
+            "name": "get_env_vars",
+            "description": "Get environment variables for a project",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "projectName": {
+                  "type": "string",
+                  "description": "Vercel project name"
+                }
+              },
+              "required": ["projectName"]
+            }
+          },
+          {
+            "name": "set_env_var",
+            "description": "Set an environment variable",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "projectName": {
+                  "type": "string",
+                  "description": "Vercel project name"
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Environment variable key"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Environment variable value"
+                },
+                "target": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["production", "preview", "development"]
+                  },
+                  "description": "Target environments"
+                }
+              },
+              "required": ["projectName", "key", "value", "target"]
+            }
+          }
+        ],
+        "resources": [
+          {
+            "uri": "vercel://projects",
+            "name": "Vercel Projects",
+            "description": "Access to all Vercel projects"
+          },
+          {
+            "uri": "vercel://logs",
+            "name": "Deployment Logs",
+            "description": "Real-time deployment and runtime logs"
+          }
+        ]
+      }
+    }
+  }
+}

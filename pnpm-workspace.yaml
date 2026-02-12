@@ -1,0 +1,6 @@
+# Workspace packages are managed per-language.
+# The root package.json runs the Next.js frontend directly.
+# Python services (apps/api, services/python/*) use their own venvs.
+# Node.js services (services/nodejs/*) use their own package.json.
+# Only shared TS packages are workspace-linked here:
+packages: []

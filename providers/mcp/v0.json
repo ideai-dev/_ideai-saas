@@ -1,0 +1,61 @@
+{
+  "mcpServers": {
+    "v0": {
+      "name": "v0 AI Code Generation",
+      "description": "Vercel's AI-powered code generation and design system",
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-v0"],
+      "env": {
+        "V0_API_KEY": "${V0_API_KEY}"
+      },
+      "capabilities": {
+        "tools": [
+          {
+            "name": "generate_component",
+            "description": "Generate React components with v0",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "description": "Description of the component to generate"
+                },
+                "style": {
+                  "type": "string",
+                  "enum": ["shadcn", "tailwind", "custom"],
+                  "description": "Component styling approach"
+                }
+              },
+              "required": ["prompt"]
+            }
+          },
+          {
+            "name": "refine_code",
+            "description": "Refine existing code with v0's AI",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "The code to refine"
+                },
+                "instruction": {
+                  "type": "string",
+                  "description": "What to improve or change"
+                }
+              },
+              "required": ["code", "instruction"]
+            }
+          }
+        ],
+        "resources": [
+          {
+            "uri": "v0://templates",
+            "name": "v0 Component Templates",
+            "description": "Access to v0's pre-built component library"
+          }
+        ]
+      }
+    }
+  }
+}

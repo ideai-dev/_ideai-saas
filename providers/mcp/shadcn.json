@@ -1,0 +1,66 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "name": "shadcn/ui Component System",
+      "description": "Access shadcn/ui components and CLI",
+      "command": "npx",
+      "args": ["shadcn-ui"],
+      "capabilities": {
+        "tools": [
+          {
+            "name": "add_component",
+            "description": "Add a shadcn/ui component to the project",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "component": {
+                  "type": "string",
+                  "description": "Component name (e.g., button, card, dialog)"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Optional custom path for the component"
+                }
+              },
+              "required": ["component"]
+            }
+          },
+          {
+            "name": "list_components",
+            "description": "List all available shadcn/ui components",
+            "inputSchema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          {
+            "name": "update_components",
+            "description": "Update existing shadcn/ui components",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "components": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Array of component names to update"
+                }
+              }
+            }
+          }
+        ],
+        "resources": [
+          {
+            "uri": "shadcn://components",
+            "name": "Component Registry",
+            "description": "Browse all available shadcn/ui components"
+          },
+          {
+            "uri": "shadcn://themes",
+            "name": "Theme Presets",
+            "description": "Access theme color presets"
+          }
+        ]
+      }
+    }
+  }
+}
